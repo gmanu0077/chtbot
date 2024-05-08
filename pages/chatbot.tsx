@@ -18,6 +18,9 @@ const ChatInterface: React.FC = () => {
 
     const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+       try{ const loader: HTMLElement | null=document.getElementById('loader')
+        if(loader)
+            loader.style.display='block'
         if (input.trim() !== '') {
             const newMessage: Message = {
                 id: messages.length + 1,
@@ -32,13 +35,20 @@ const ChatInterface: React.FC = () => {
                 const response = await axios.post('/api/chat',  {
                     query:input
                 });
+                const res:any=await response.data.answer
                 const botResponse: Message = {
                     id: messages.length + 2,
-                    text: `${response}`,
+                    text: `${res}`,
                     sender: 'bot'
                 };
                 setMessages(prevMessages => [...prevMessages, botResponse]);
            
+        }
+       // const loader: HTMLElement | null=document.getElementById('loader')
+        if(loader)
+            loader.style.display='none'
+        }catch(err){
+            console.log(err)
         }
     };
 
@@ -60,6 +70,9 @@ const ChatInterface: React.FC = () => {
                 />
                 <button type="submit" className="submit-button">Send</button>
             </form>
+            <div className='loader' id="loader">
+
+            </div>
         </div>
     );
 };
