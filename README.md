@@ -1,40 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Objective:
+My goal was to create an efficient and accurate chatbot by leveraging Vector DB and OpenAI’s Large Language Model (LLM). I aimed to improve response quality and speed.
 
-## Getting Started
 
-First, run the development server:
+Technology Stack--
+I chose the following technologies for the project:
+Typescript: A statically typed language that enhances tooling and type safety.
+Next.js: A React framework for server-rendered web applications.
+Node.js: The runtime environment for executing JavaScript on the server side.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tools Used:--
+Pinecone: A vector database for efficient similarity search based on embeddings.
+OpenAI: Utilising LLM for natural language understanding and generation.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Methodology---
+Chunking PDF Text:
+I broke down PDF text into manageable chunks on the server side.
+Each chunk was then embedded by OpenAI, with reference text serving as metadata.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Storage in Pinecone:
+The embedded chunks were stored in Pinecone for efficient similarity search.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Handling Queries:
+When a query was posed, I embedded it using OpenAI.
+The embedded query was then queried in Pinecone, returning similar chunks along with metadata.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Final Response Generation:
+I combined the relevant chunks and passed them to OpenAI to form the final chatbot response.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+Challenges Faced--
+Chunk Size and Vector Array Optimization:
+Determining the right chunk size and vector array size for Pinecone was challenging.
+OpenAI 3.5 Limitations:
+OpenAI 3.5 didn’t always generate optimal responses, highlighting the importance of model selection.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Key Learning---
+Understanding the core workings of Vector DBs like Pinecone is crucial for building effective search systems.
+Professionalism in project execution ensures success.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
